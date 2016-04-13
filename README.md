@@ -133,6 +133,7 @@ lsststack::lsstsw { 'lsstsw':
   group             => $title,
   manage_user       => true,
   manage_group      => true,
+  lsstsw_path       => undef,
   lsstsw_repo       => 'https://github.com/lsst/lsstsw.git',
   lsstsw_branch     => 'master',
   lsstsw_ensure     => 'present',
@@ -170,6 +171,10 @@ If `true`, a `User` resource is declared for `$user`. If `false`, a `User` resou
 
 If `true`, a `Group` resource is declared for `$group`. If `false`, a `Group`
 resource must be externally declared in the manifest.
+
+##### `lsstsw_path`
+
+`String` Defaults to `undef`
 
 ##### `lsstsw_repo`
 

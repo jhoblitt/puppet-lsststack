@@ -5,6 +5,7 @@ define lsststack::lsstsw(
   $group             = $title,
   $manage_user       = true,
   $manage_group      = true,
+  $lsstsw_path       = undef,
   $lsstsw_repo       = hiera('lsststack::lsstsw::lsstsw_repo',
                               'https://github.com/lsst/lsstsw.git'),
   $lsstsw_branch     = hiera('lsststack::lsstsw::lsstsw_branch',
@@ -33,6 +34,7 @@ define lsststack::lsstsw(
   validate_string($group)
   validate_bool($manage_user)
   validate_bool($manage_group)
+  if $lsstsw_path { validate_absolute_path($lsstsw_path) }
   validate_string($lsstsw_repo)
   validate_string($lsstsw_branch)
   validate_re($lsstsw_ensure, ['^present$', '^latest$'])
@@ -76,9 +78,14 @@ define lsststack::lsstsw(
     default => $user_home,
   }
 
-  $lsstsw = "${home}/lsstsw"
+  $real_lsstsw_path = $lsstsw_path ? {
+    undef   => $home,
+    default => $lsstsw_path,
+  }
+
+  $lsstsw = "${real_lsstsw_path}/lsstsw"
   $lsst_build = "${lsstsw}/lsst_build"
-  $buildbot = "${home}/buildbot-scripts"
+  $buildbot = "${real_lsstsw_path}/buildbot-scripts"
 
   vcsrepo { $lsstsw:
     ensure   => $lsstsw_ensure,

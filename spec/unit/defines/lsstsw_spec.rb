@@ -176,6 +176,29 @@ describe 'lsststack::lsstsw', :type => :define do
       end
     end # manage_group =>
 
+    context 'lsstsw_path =>' do
+      context '(unset)' do
+        it do
+          should contain_lsststack__lsstsw(name).with(
+            :lsstsw_path => nil
+          )
+        end
+        it { should contain_vcsrepo("/home/#{name}/lsstsw") }
+      end
+
+      context '/dne' do
+        let(:params) {{ :lsstsw_path => '/dne' }}
+
+        it { should contain_vcsrepo("/dne/lsstsw") }
+      end
+
+      context 'foo' do
+        let(:params) {{ :lsstsw_path => 'foo' }}
+
+        it { should raise_error(Puppet::Error, /is not an absolute path/) }
+      end
+    end # lsstsw_path =>
+
     context 'lsstsw_repo =>' do
       context '(unset)' do
         it do
