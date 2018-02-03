@@ -16,7 +16,6 @@ class lsststack::params {
         'ca-certificates', # needed by curl on ubuntu
         'curl',
         'flex',
-        'g++',
         'git',
         'libbz2-dev',
         'libgl1-mesa-swx11', # needed by conda qt / pyqt packages
@@ -42,6 +41,11 @@ class lsststack::params {
         'perl-modules',
       ]
 
+      # unused
+      $cc_packages = [
+        'g++',
+      ]
+
       $convenience_packages = [
         'screen',
         'tmux',
@@ -60,8 +64,6 @@ class lsststack::params {
         'flex',
         'fontconfig',
         'freetype-devel',
-        'gcc-c++',
-        'gcc-gfortran',
         'git', # needed on el6, in @core for others?
         'libuuid-devel',
         'libXext',
@@ -87,6 +89,12 @@ class lsststack::params {
         'gettext',
         'libcurl-devel',
         'perl-ExtUtils-MakeMaker',
+      ]
+
+      # unused
+      $cc_packages = [
+        'gcc-c++',
+        'gcc-gfortran',
       ]
 
       $convenience_packages = [

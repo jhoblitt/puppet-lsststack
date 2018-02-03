@@ -10,8 +10,6 @@ describe 'lsststack', :type => :class do
     'flex',
     'fontconfig',
     'freetype-devel',
-    'gcc-c++',
-    'gcc-gfortran',
     'git', # needed on el6, in @core for others?
     'libuuid-devel',
     'libXext',
@@ -52,7 +50,6 @@ describe 'lsststack', :type => :class do
     'ca-certificates', # needed by curl on ubuntu
     'curl',
     'flex',
-    'g++',
     'git',
     'libbz2-dev',
     'libgl1-mesa-swx11', # needed by conda qt / pyqt packages
